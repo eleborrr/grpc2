@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option csharp_namespace = "grpc2";
+
+package greet;
+
+import "google/protobuf/empty.proto";
+
+
+service Meteo {
+  // Sends a greeting
+  rpc GetMeteoData (google.protobuf.Empty) returns (stream MeteoData);
+}
+
+// The response message containing the greetings.
+message MeteoData {
+  double temperature = 1;
+  string date = 2;
+  string time = 3;
+}
+
+service Private{
+  rpc GetSecret (google.protobuf.Empty) returns (SecretData);
+}
+
+message SecretData{
+  string secret = 1;
+}
+
+service Auth{
+  rpc GetJwt (google.protobuf.Empty) returns (AuthData);
+}
+
+message AuthData{
+  string secret = 1;
+}
+
+
