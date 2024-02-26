@@ -7,8 +7,12 @@ using var channel = GrpcChannel.ForAddress("http://localhost:5212");
 
 Console.WriteLine("Напиши номер задания (1 или 2)");
 
-input:
 var inpt = Console.ReadLine();
+while (inpt != "1" && inpt != "2")
+{
+    Console.WriteLine("Неверный ввод. Напиши номер задания (1 или 2)");
+    inpt = Console.ReadLine();
+}
 if (inpt == "1")
 {
     var client = new Meteo.MeteoClient(channel);
@@ -45,11 +49,7 @@ else if (inpt == "2")
     using var call3 = client.GetSecretAsync(new Empty(), headers);
     Console.WriteLine(call3.ResponseAsync.Result.Secret);
 }
-else
-{
-    Console.WriteLine("Неверный ввод. Напиши номер задания (1 или 2)");
-    goto input;
-}
+
 
 
 
